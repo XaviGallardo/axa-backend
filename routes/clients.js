@@ -9,12 +9,10 @@ const router = express.Router();
 router.get('/:type/:data', verifyJWToken, async (req, res, next) => {
   const { type, data } = req.params;
   if (type === 'id' || type === 'name') {
-    console.log('TCL: req.token', req.token);
     jwt.verify(
       req.token,
       `${process.env.SECRET_KEY}`,
       async (err, authData) => {
-        console.log('TCL: process.env.SECRET_KEY', process.env.SECRET_KEY);
         if (err) {
           res.sendStatus(403);
         } else if (
@@ -26,9 +24,9 @@ router.get('/:type/:data', verifyJWToken, async (req, res, next) => {
             if (type === 'id') {
               client = await Client.findOne({ id: data });
             } else {
-              client = await Client.findOne({ name: data });
+              client = await Client.find({ name: data });
             }
-            if (client) {
+            if (client && client.length > 0) {
               res.json({ client });
             } else {
               res.json({ message: 'Client not found' });

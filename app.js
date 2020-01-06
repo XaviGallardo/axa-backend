@@ -32,7 +32,7 @@ const usersRouter = require('./routes/users');
 
 const loginRoute = require('./routes/login');
 const clientsRoute = require('./routes/clients');
-// const policiesRoute = require('./routes/policies');
+const policiesRoute = require('./routes/policies');
 
 const app = express();
 
@@ -51,6 +51,7 @@ app.use('/users', usersRouter);
 
 app.use('/api/login', loginRoute.router);
 app.use('/api/clients', clientsRoute);
+app.use('/api/policies', policiesRoute);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
