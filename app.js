@@ -17,13 +17,22 @@ const usersRouter = require('./routes/users');
       useUnifiedTopology: true,
       useNewUrlParser: true,
     });
+    // console.log(
+    //   `Connected to Mongo! Database name: "${connection.connections[0].db.s.databaseName}"`,
+    // );
     console.log(
-      `Connected to Mongo! Database name: "${connection.connections[0].db.s.databaseName}"`,
+      `Connected to Mongo! Database name: "${connection.connections[0].name}"`,
     );
   } catch (err) {
     console.log('Error connecting to Mongo database.', err);
   }
 })();
+
+// Importing ROUTES
+
+const loginRoute = require('./routes/login');
+const clientsRoute = require('./routes/clients');
+// const policiesRoute = require('./routes/policies');
 
 const app = express();
 
@@ -39,6 +48,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+
+app.use('/api/login', loginRoute.router);
+app.use('/api/clients', clientsRoute);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
