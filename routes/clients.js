@@ -26,7 +26,7 @@ router.get('/:type/:data', verifyJWToken, async (req, res, next) => {
             } else {
               client = await Client.find({ name: data });
             }
-            if (client && client.length > 0) {
+            if (client || client.length > 0) {
               res.json({ client });
             } else {
               res.json({ message: 'Client not found' });

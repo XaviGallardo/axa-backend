@@ -13,3 +13,5 @@ This fake data is used to seed an online DataBase to test.
 Don't need to seed the DataBase, it's already done. If the DataBase is empty, please run -> npm run seeds <- to seed the DataBase.
 
 dotenv to use environment variables, Should be in .gitignore, but in this case I created a test user to play with MongoAtlas.
+
+## Routes
